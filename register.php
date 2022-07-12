@@ -73,7 +73,7 @@ if (isset($_SESSION['user'])) {
                                         <!-- Form Group (jenis kelamin)-->
                                         <div class="mb-3">
                                             <label class="small mb-1" for="jenis-kelamin">Jenis Kelamin</label>
-                                            <select class="form-control" id="jenis-kelamin" name="jenis-kelamin">
+                                            <select class="form-control" id="jenis-kelamin" name="jk">
                                                 <option value="Laki-laki">Laki-laki</option>
                                                 <option value="Perempuan">Perempuan</option>
                                             </select>
@@ -83,7 +83,7 @@ if (isset($_SESSION['user'])) {
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href="auth-login-basic.html">Have an account? Go to login</a></div>
+                                    <div class="small"><a href="index.php">Have an account? Go to login</a></div>
                                 </div>
                             </div>
                         </div>
