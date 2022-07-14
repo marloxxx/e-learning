@@ -2,9 +2,7 @@
 session_start();
 require_once('config/koneksi.php');
 require_once('config/function.php');
-var_dump($_SESSION);
 if (isset($_SESSION['user'])) {
-
     redirect($_SESSION['user']['role']);
 }
 ?>

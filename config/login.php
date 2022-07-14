@@ -42,7 +42,8 @@ if (empty($username)) {
                     );
                     $response = array(
                         'status' => 'success',
-                        'message' => 'Login berhasil'
+                        'message' => 'Login berhasil',
+                        'url' => BASE_URL . 'siswa/dashboard'
                     );
                     echo json_encode($response);
                 } else {
@@ -86,7 +87,7 @@ if (empty($username)) {
                 $response = array(
                     'status' => 'success',
                     'message' => 'Login berhasil',
-                    'url' => base_url('guru/dashboard/index.php')
+                    'url' => BASE_URL . 'guru/dashboard'
                 );
                 echo json_encode($response);
             } else {
@@ -122,7 +123,7 @@ if (empty($username)) {
                 $response = array(
                     'status' => 'success',
                     'message' => 'Login berhasil',
-                    'url' => base_url('admin/dashboard/index.php')
+                    'url' => BASE_URL . 'admin/dashboard/'
                 );
                 echo json_encode($response);
             } else {

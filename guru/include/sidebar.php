@@ -6,25 +6,18 @@
                     <!-- Sidenav Menu Heading (Core)-->
                     <div class="sidenav-menu-heading">Main</div>
                     <!-- Sidenav Link (Dashboard)-->
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link" href="<?php base_url('admin/dashboard'); ?>">
                         <div class="nav-link-icon">
                             <i data-feather="home"></i>
                         </div>
                         Dashboards
                     </a>
-                    <!-- Sidenav Link (Server)-->
-                    <a class="nav-link" href="{{ route('admin.server.index') }}">
+                    <!-- Sidenav Link (Guru)-->
+                    <a class="nav-link" href="<?php base_url('admin/guru'); ?>">
                         <div class="nav-link-icon">
-                            <i data-feather="server"></i>
+                            <i data-feather="users"></i>
                         </div>
-                        Server
-                    </a>
-                    <!-- Sidenav Link (Site)-->
-                    <a class="nav-link" href="{{ route('admin.site') }}">
-                        <div class="nav-link-icon">
-                            <i data-feather="globe"></i>
-                        </div>
-                        Site
+                        Guru
                     </a>
                 </div>
             </div>
@@ -32,9 +25,10 @@
             <div class="sidenav-footer">
                 <div class="sidenav-footer-content">
                     <div class="sidenav-footer-subtitle">Logged in as:</div>
-                    <div class="sidenav-footer-title"></div>
+                    <div class="sidenav-footer-title">
+                        <?php echo $_SESSION['user']['nama']; ?>
+                    </div>
                 </div>
             </div>
         </nav>
     </div>
-</div>

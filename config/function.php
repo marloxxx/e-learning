@@ -101,21 +101,27 @@ function extension($path)
 function redirect($role)
 {
     if ($role == 'admin') {
-        header('location: ' . base_url('admin/dashboard/index.php'));
+        header('location: ' . BASE_URL . 'admin/dashboard/');
     } elseif ($role == 'guru') {
-        header('location: ' . base_url('guru/'));
+        header('location: ' . BASE_URL . 'guru/dashboard/');
     } elseif ($role == 'siswa') {
-        header('location: ' . base_url('siswa/'));
+        header('location: ' . BASE_URL . 'siswa/dashboard/');
     } else {
-        header('location: ' . base_url('login.php'));
+        header('location: ' . BASE_URL);
     }
 }
+
 function cek_login()
 {
-    var_dump($_SESSION);
     if (isset($_SESSION['user'])) {
         return true;
     } else {
         return false;
     }
+}
+
+function logout()
+{
+    session_destroy();
+    header('location: ' . BASE_URL);
 }

@@ -36,7 +36,7 @@
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?php base_url('logout.php'); ?>">
+                <a class="dropdown-item" href="javascript:;" onclick="location.href='<?php base_url('logout.php'); ?>'">
                     <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                     Logout
                 </a>
