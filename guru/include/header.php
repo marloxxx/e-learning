@@ -7,7 +7,7 @@
     <!-- * * Tip * * You can use text or an image for your navbar brand.-->
     <!-- * * * * * * When using an image, we recommend the SVG format.-->
     <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="<?php base_url('admin/dashboard/index.php') ?>">E-Learning</a>
+    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="<?php base_url('guru/dashboard/index.php') ?>">E-Learning</a>
     <!-- Navbar Items-->
     <ul class="navbar-nav align-items-center ms-auto">
         <!-- User Dropdown-->

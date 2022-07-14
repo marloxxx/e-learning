@@ -19,7 +19,7 @@ if (!isset($_SESSION['user'])) {
                                     <line x1="20" y1="8" x2="20" y2="14"></line>
                                     <line x1="23" y1="11" x2="17" y2="11"></line>
                                 </svg></div>
-                            Tambah Guru
+                            Tambah Kelas
                         </h1>
                     </div>
                     <div class="col-12 col-xl-auto mb-3">

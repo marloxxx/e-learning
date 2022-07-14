@@ -125,3 +125,11 @@ function logout()
     session_destroy();
     header('location: ' . BASE_URL);
 }
+function relation($table, $id, $field)
+{
+    global $mysqli;
+    $sql = "SELECT * FROM $table WHERE $field = $id";
+    $query = $mysqli->query($sql);
+    $row = $query->fetch_array();
+    return $row;
+}

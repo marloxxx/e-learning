@@ -76,7 +76,7 @@ if (empty($username)) {
         if ($query->rowCount() > 0) {
             if (password_verify($password, $result['password'])) {
                 $_SESSION['user'] = array(
-                    'id' => $result['id'],
+                    'id' => $result['id_guru'],
                     'username' => $result['username'],
                     'role' => $role,
                     'nama' => $result['nama'],

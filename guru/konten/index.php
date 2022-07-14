@@ -5,6 +5,7 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
+$id_submateri = $_GET['id_submateri'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,16 +38,16 @@ if (!isset($_SESSION['user'])) {
                                 <div class="col-auto mt-4">
                                     <h1 class="page-header-title">
                                         <div class="page-header-icon">
-                                            <i data-feather="users"></i>
+                                            <i class="fas fa-book"></i>
                                         </div>
-                                        Guru
+                                        Konten
                                     </h1>
-                                    <div class="page-header-subtitle">List Guru
+                                    <div class="page-header-subtitle">List Konten
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-auto mt-4">
                                     <div class="btn-group">
-                                        <a href="javascript:;" onclick="load_input('<?php base_url('admin/guru/create.php') ?>');" class="btn btn-white">Tambah Guru</a>
+                                        <a href="javascript:;" onclick="handle_open_modal('<?php base_url('guru/konten/create.php?id_submateri=' . $id_submateri) ?>',  '#modalListResult', '#contentListResult');" class="btn btn-white">Tambah Konten</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +72,7 @@ if (!isset($_SESSION['user'])) {
     require_once('../include/script.php');
     ?>
     <script>
-        load_list('<?php base_url("admin/guru/list.php"); ?>');
+        load_list('<?php base_url("guru/konten/list.php?id_submateri=" . $id_submateri); ?>');
     </script>
 </body>
 

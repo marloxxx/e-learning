@@ -3,8 +3,8 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-$(document).ready(function() {
-    $(document).on('click', '.paginasi', function(event) {
+$(document).ready(function () {
+    $(document).on('click', '.paginasi', function (event) {
         event.preventDefault();
         $('.paginasi').removeClass('active');
         $(this).parent('.paginasi').addClass('active');
@@ -14,67 +14,69 @@ $(document).ready(function() {
 
     const datatables = document.getElementById('datatables');
     if (datatables) {
-    new simpleDatatables.DataTable(datatables);
+        new simpleDatatables.DataTable(datatables);
     }
 });
 
-function main_content(obj){
+function main_content(obj) {
     $("#content_list").hide();
     $("#content_input").hide();
     $("#content_detail").hide();
     $("#" + obj).show();
 }
+
 function load_list(url) {
-    $.get(url, function(data) {
+    $.get(url, function (data) {
         $('#list_result').html(data);
         main_content('content_list');
         new simpleDatatables.DataTable(datatables);
     }, "html");
 }
-function load_input(url){
-    $.get(url, {}, function(result) {
+
+function load_input(url) {
+    $.get(url, {}, function (result) {
         $('#content_input').html(result);
         main_content('content_input');
     }, "html");
 }
-function load_detail(url){
-    $.get(url, {}, function(result) {
+
+function load_detail(url) {
+    $.get(url, {}, function (result) {
         $('#content_detail').html(result);
         main_content('content_detail');
     }, "html");
 }
-function handle_save(tombol, form, url){
-    $(tombol).submit(function () {
-        return false;
-    });
-    let data = $(form).serialize();
-    $(tombol).prop("disabled", true);
-    $(tombol).html("Please wait");
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: data,
-        dataType: 'json',
-        beforeSend: function() {
 
-        },
-        success: function (response) {
-            if (response.alert=="success") {
-                success_toastr(response.message);
-                $(form)[0].reset();
-                setTimeout(function () {
-                    $(tombol).prop("disabled", false);
-                    $(tombol).html('Simpan');
-                    main_content('content_list');
-                }, 2000);
-            } else {
-                error_toastr(response.message);
-                setTimeout(function () {
-                    $(tombol).prop("disabled", false);
-                    $(tombol).html('Simpan');
-                }, 2000);
-            }
-        },
+function handle_save(tombol, form, url) {
+    $(document).one('submit', form, function (e) {
+        let data = $(form).serialize();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            beforeSend: function () {
+                $(tombol).prop("disabled", true);
+                $(tombol).html("Please wait");
+            },
+            success: function (response) {
+                if (response.alert == "success") {
+                    success_toastr(response.message);
+                    $(form)[0].reset();
+                    setTimeout(function () {
+                        $(tombol).prop("disabled", false);
+                        $(tombol).html('Simpan');
+                        main_content('content_list');
+                    }, 2000);
+                } else {
+                    error_toastr(response.message);
+                    setTimeout(function () {
+                        $(tombol).prop("disabled", false);
+                        $(tombol).html('Simpan');
+                    }, 2000);
+                }
+            },
+        });
     });
 }
 
@@ -97,12 +99,12 @@ function hapus(id, url) {
                 url: url,
                 type: "POST",
                 data: data,
-                success: function(response) {
+                success: function (response) {
                     Swal.fire(
                         'Terhapus!',
                         'Data anda telah terhapus.',
                         'success'
-                    ).then(function() {
+                    ).then(function () {
                         load_list(response.url);
                     });
                 }
@@ -117,7 +119,7 @@ function hapus(id, url) {
     })
 }
 
-function handle_open_modal(url,modal,content){
+function handle_open_modal(url, modal, content) {
     $.ajax({
         type: "GET",
         url: url,
@@ -130,8 +132,9 @@ function handle_open_modal(url,modal,content){
         },
     });
 }
-function handle_save_modal(tombol, form, url, method, modal){
-    $(tombol).submit(function() {
+
+function handle_save_modal(tombol, form, url, method, modal) {
+    $(tombol).submit(function () {
         return false;
     });
     let data = $(form).serialize();
@@ -143,15 +146,14 @@ function handle_save_modal(tombol, form, url, method, modal){
         url: url,
         data: data,
         dataType: 'json',
-        beforeSend: function() {
-        },
-        success: function(response) {
+        beforeSend: function () {},
+        success: function (response) {
             loaded();
             if (response.status == "success") {
                 success_toastr(response.message);
                 $(form)[0].reset();
                 load_list(response.url);
-                setTimeout(function() {
+                setTimeout(function () {
                     $(modal).modal('hide');
                     $(tombol).prop("disabled", false);
                     $(tombol).removeAttr("data-kt-indicator");
@@ -159,7 +161,7 @@ function handle_save_modal(tombol, form, url, method, modal){
                 }, 2000);
             } else {
                 error_toastr(response.message);
-                setTimeout(function() {
+                setTimeout(function () {
                     $(tombol).prop("disabled", false);
                     $(tombol).removeAttr("data-kt-indicator");
                 }, 2000);
@@ -167,6 +169,7 @@ function handle_save_modal(tombol, form, url, method, modal){
         },
     });
 }
+
 function back() {
     $('#content_list').show();
     $('#content_input').hide();

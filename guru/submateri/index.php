@@ -5,6 +5,14 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
+$id_materi = $_GET['id_materi'];
+$sql = "SELECT * FROM tb_materi WHERE id_materi = '$id_materi'";
+$query = $con->prepare($sql);
+$query->execute();
+$result = $query->fetch(PDO::FETCH_ASSOC);
+if (empty($result)) {
+    header('Location: ../include/404.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +23,7 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Learning | Guru</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.png" />
     <?php
     require_once('../include/head.php');
     ?>
@@ -37,16 +45,16 @@ if (!isset($_SESSION['user'])) {
                                 <div class="col-auto mt-4">
                                     <h1 class="page-header-title">
                                         <div class="page-header-icon">
-                                            <i data-feather="users"></i>
+                                            <i class="fas fa-book"></i>
                                         </div>
-                                        Guru
+                                        Materi
                                     </h1>
-                                    <div class="page-header-subtitle">List Guru
+                                    <div class="page-header-subtitle">List Sub Materi
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-auto mt-4">
                                     <div class="btn-group">
-                                        <a href="javascript:;" onclick="load_input('<?php base_url('admin/guru/create.php') ?>');" class="btn btn-white">Tambah Guru</a>
+                                        <a href="javascript:;" onclick="handle_open_modal('<?php base_url('guru/submateri/create.php?id_materi=' . $id_materi) ?>',  '#modalListResult', '#contentListResult');" class="btn btn-white">Tambah Sub Materi</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +79,7 @@ if (!isset($_SESSION['user'])) {
     require_once('../include/script.php');
     ?>
     <script>
-        load_list('<?php base_url("admin/guru/list.php"); ?>');
+        load_list('<?php base_url("guru/submateri/list.php?id_materi=" . $id_materi) ?>', '#list_result');
     </script>
 </body>
 
