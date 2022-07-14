@@ -2,9 +2,14 @@
 session_start();
 require_once('config/koneksi.php');
 require_once('config/function.php');
+global $con;
 if (isset($_SESSION['user'])) {
     redirect($_SESSION['user']['role']);
 }
+$sql = "SELECT * FROM tb_m_kelas";
+$query = $con->prepare($sql);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +25,8 @@ if (isset($_SESSION['user'])) {
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/sweetalert.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/toastr.css" type="text/css" />
 </head>
 
 <body class="bg-primary">
@@ -36,7 +43,7 @@ if (isset($_SESSION['user'])) {
                                 </div>
                                 <div class="card-body">
                                     <!-- Registration form-->
-                                    <form>
+                                    <form id="form_register">
                                         <!-- Form Row-->
                                         <!-- Form Group (name)-->
                                         <div class="mb-3">
@@ -70,13 +77,30 @@ if (isset($_SESSION['user'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Form Group (jenis kelamin)-->
-                                        <div class="mb-3">
-                                            <label class="small mb-1" for="jenis-kelamin">Jenis Kelamin</label>
-                                            <select class="form-control" id="jenis-kelamin" name="jk">
-                                                <option value="Laki-laki">Laki-laki</option>
-                                                <option value="Perempuan">Perempuan</option>
-                                            </select>
+                                        <div class="row gx-3">
+                                            <div class="col-md-6">
+                                                <!-- Form Group (jenis kelamin)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="jenis-kelamin">Jenis Kelamin</label>
+                                                    <select class="form-control" id="jenis-kelamin" name="jk">
+                                                        <option value="Laki-laki">Laki-laki</option>
+                                                        <option value="Perempuan">Perempuan</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="kelas">Kelas</label>
+                                                    <select class="form-control" id="kelas" name="kelas">
+                                                        <option value="">Pilih Kelas</option>
+                                                        <?php
+                                                        foreach ($result as $row) {
+                                                            echo '<option value="' . $row['id_kelas'] . '">' . $row['nama'] . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- Form Group (create account submit)-->
                                         <a class="btn btn-primary btn-block" href="auth-login-basic.html">Create Account</a>
@@ -106,8 +130,42 @@ if (isset($_SESSION['user'])) {
             </footer>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/toastr.js"></script>
+    <script src="assets/js/sweetalert.js"></script>
+    <script>
+        $('#form_register').on('submit', function(e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            $.post('config/register.php', data, function(response) {
+                if (response.status == 'success') {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "success",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, Mengerti!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function() {
+                        window.location.href = response.redirect;
+                    });
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, Mengerti!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

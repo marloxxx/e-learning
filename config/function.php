@@ -1,4 +1,13 @@
 <?php
+define('BASE_URL', 'http://localhost/e-learning/');
+function base_url($url = null)
+{
+    if ($url != null) {
+        echo BASE_URL . $url;
+    } else {
+        echo BASE_URL;
+    }
+}
 function antiinjeksi($text)
 {
     global $mysqli;
@@ -89,44 +98,24 @@ function extension($path)
     }
 }
 
-function login($username, $password)
-{
-    global $mysqli;
-    $username = antiinjeksi($username);
-    $password = antiinjeksi($password);
-    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-    $query = $mysqli->query($sql);
-    $row = $query->fetch_array();
-    if ($query->num_rows > 0) {
-        $_SESSION['user'] = array(
-            'id' => $row['id'],
-            'username' => $row['username'],
-            'password' => $row['password'],
-            'level' => $row['level'],
-            'nama' => $row['nama'],
-            'email' => $row['email'],
-            'alamat' => $row['alamat'],
-            'no_hp' => $row['no_hp'],
-            'tgl_lahir' => $row['tgl_lahir'],
-            'foto' => $row['foto'],
-            'status' => $row['status'],
-            'created_at' => $row['created_at'],
-            'updated_at' => $row['updated_at']
-        );
-        return true;
-    } else {
-        return false;
-    }
-}
 function redirect($role)
 {
     if ($role == 'admin') {
-        header('location: admin/index.php');
+        header('location: ' . base_url('admin/dashboard/index.php'));
     } elseif ($role == 'guru') {
-        header('location: guru/index.php');
+        header('location: ' . base_url('guru/'));
     } elseif ($role == 'siswa') {
-        header('location: siswa/index.php');
+        header('location: ' . base_url('siswa/'));
     } else {
-        header('location: index.php');
+        header('location: ' . base_url('login.php'));
+    }
+}
+function cek_login()
+{
+    var_dump($_SESSION);
+    if (isset($_SESSION['user'])) {
+        return true;
+    } else {
+        return false;
     }
 }

@@ -2,7 +2,9 @@
 session_start();
 require_once('config/koneksi.php');
 require_once('config/function.php');
+var_dump($_SESSION);
 if (isset($_SESSION['user'])) {
+
     redirect($_SESSION['user']['role']);
 }
 ?>
@@ -20,6 +22,8 @@ if (isset($_SESSION['user'])) {
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/sweetalert.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/toastr.css" type="text/css" />
 </head>
 
 <body class="bg-primary">
@@ -37,10 +41,10 @@ if (isset($_SESSION['user'])) {
                                 <div class="card-body">
                                     <!-- Login form-->
                                     <form id="form_login">
-                                        <!-- Form Group (email address)-->
+                                        <!-- Form Group (username)-->
                                         <div class="mb-3">
-                                            <label class="small mb-1" for="email">Email</label>
-                                            <input class="form-control" id="email" type="email" placeholder="Enter email address" name="email" />
+                                            <label class="small mb-1" for="username">Username</label>
+                                            <input class="form-control" id="username" name="username" type="text" placeholder="Enter username" />
                                         </div>
                                         <!-- Form Group (password)-->
                                         <div class="mb-3">
@@ -49,10 +53,12 @@ if (isset($_SESSION['user'])) {
                                         </div>
                                         <!-- Form Group (remember password checkbox)-->
                                         <div class="mb-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" id="remember" type="checkbox" value="true" />
-                                                <label class="form-check-label" for="remember">Remember password</label>
-                                            </div>
+                                            <label class="small mb-1" for="role">Role</label>
+                                            <select class="form-control" id="role" name="role">
+                                                <option value="siswa">Siswa</option>
+                                                <option value="guru">Guru</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
                                         </div>
                                         <!-- Form Group (login box)-->
                                         <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
@@ -85,8 +91,42 @@ if (isset($_SESSION['user'])) {
             </footer>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/toastr.js"></script>
+    <script src="assets/js/sweetalert.js"></script>
+    <script>
+        $('#form_login').on('submit', function(e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            $.post('config/login.php', data, function(response) {
+                if (response.status == 'success') {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "success",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, Mengerti!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function() {
+                        window.location.href = response.url;
+                    });
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, Mengerti!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
