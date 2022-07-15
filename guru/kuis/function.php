@@ -41,7 +41,7 @@ if ($_POST['action'] == 'tambah') {
         echo json_encode($response);
     } else {
         //   insert data using PDO
-        $sql = "INSERT INTO tb_m_kuis (id_materi, judul, waktu, jumlah_soal, tanggal) VALUES ('$id_materi', '$judul', '$waktu', '$jumlah', '$tanggal')";
+        $sql = "INSERT INTO tb_m_kuis (id_materi, judul, waktu, jumlah_soal, waktu_mulai) VALUES ('$id_materi', '$judul', '$waktu', '$jumlah', '$tanggal')";
         $query = $con->prepare($sql);
         $query->execute();
         if ($query) {

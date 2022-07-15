@@ -55,7 +55,7 @@ if (empty($result) == true) {
                                 </div>
                                 <div class="col-12 col-xl-auto mt-4">
                                     <div class="btn-group">
-                                        <a href="javascript:;" onclick="load_input('<?php base_url('guru/kuis/create.php') ?>');" class="btn btn-white">Tambah Guru</a>
+                                        <a href="javascript:;" onclick="load_input('<?php base_url('guru/soal/create.php?id_kuis=' . $id_kuis) ?>');" class="btn btn-white">Tambah Soal</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +71,9 @@ if (empty($result) == true) {
         <div id="content_input">
 
         </div>
+        <div id="content_detail">
+
+        </div>
         <?php
         require_once('../include/footer.php');
         ?>
@@ -81,7 +84,7 @@ if (empty($result) == true) {
     ?>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        load_list('<?php base_url("guru/kuis/list.php"); ?>');
+        load_list('<?php base_url("guru/soal/list.php?id_kuis=$id_kuis") ?>');
     </script>
 </body>
 

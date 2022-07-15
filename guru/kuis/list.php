@@ -29,10 +29,10 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $row['judul']; ?></td>
-                        <td><?php echo relation('tb_m_materi', 'id_materi', $row['id_materi']['judul']); ?></td>
+                        <td><?php echo relation('tb_m_materi', 'id_materi', $row['id_materi'])['judul']; ?></td>
                         <td><?php echo $row['waktu']; ?></td>
                         <td><?php echo $row['jumlah_soal']; ?></td>
-                        <td><?php echo $row['tanggal_mulai']; ?></td>
+                        <td><?php echo $row['waktu_mulai']; ?></td>
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="<?= base_url('guru/soal/?id_kuis=' . $row['id_kuis']) ?>" class="btn btn-primary">
