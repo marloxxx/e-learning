@@ -90,9 +90,9 @@ $judul_mapel = relation('tb_m_mapel', 'id_mapel', $id)['nama'];
                                                     </span>
                                                     Lihat Sub Materi
                                                 </a>
-                                                <a href="<?= base_url('siswa/kuis/?id_materi=' . $row['id_materi'] . '&id_mapel=' . $id) ?>" class="btn btn-info">
+                                                <a href="<?= base_url('siswa/kuis/?id_materi=' . $row['id_materi'] . '&id_mapel=' . $id) ?>" class="btn btn-success">
                                                     <span class="symbol-btn-group me-2">
-                                                        <i class="fas fa-eye"></i>
+                                                        <i data-feather="file-text"></i>
                                                     </span>
                                                     Lihat Kuis
                                                 </a>
