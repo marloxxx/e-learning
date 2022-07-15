@@ -7,7 +7,7 @@ $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="card mb-4">
-    <div class="card-header">List Kuis</div>
+    <div class="card-header">List Guru</div>
     <div class="card-body">
         <table id="datatables" class="table" style="width: 100%">
             <thead>
@@ -35,13 +35,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <td><?php echo $row['tanggal_mulai']; ?></td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a href="<?= base_url('guru/soal/?id_kuis=' . $row['id_kuis']) ?>" class="btn btn-primary">
-                                    <span class="symbol-btn-group">
-                                        <i class="fa fa-plus"></i>
-                                    </span>
-                                    Tambah Soal
-                                </a>
-                                <a href="javascript:;" onclick="load_input('<?= base_url('guru/kuis/edit.php?id=' . $row['id_guru']) ?>')" class="btn btn-warning">
+                                <a href="javascript:;" onclick="load_input('<?= base_url('guru/soal/edit.php?id=' . $row['id_guru']) ?>')" class="btn btn-warning">
                                     <span class="symbol-btn-group">
                                         <i class="fa fa-pencil"></i>
                                     </span>

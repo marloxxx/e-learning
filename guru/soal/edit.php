@@ -44,7 +44,7 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
     <div class="container-xl px-4 mt-4">
         <!-- Account details card-->
         <div class="card mb-4">
-            <div class="card-header">Detail Kuis</div>
+            <div class="card-header">Detail Soal</div>
             <div class="card-body">
                 <form id="form">
                     <!-- Form Row-->

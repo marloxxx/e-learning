@@ -9,6 +9,7 @@ $sql = "SELECT * FROM tb_m_materi";
 $query = $con->prepare($sql);
 $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
+$id_kuis = $_GET['id_kuis'];
 ?>
 <main>
     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
@@ -23,7 +24,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <line x1="20" y1="8" x2="20" y2="14"></line>
                                     <line x1="23" y1="11" x2="17" y2="11"></line>
                                 </svg></div>
-                            Tambah Kuis
+                            Tambah Soal
                         </h1>
                     </div>
                     <div class="col-12 col-xl-auto mb-3">
@@ -43,49 +44,73 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
     <div class="container-xl px-4 mt-4">
         <!-- Account details card-->
         <div class="card mb-4">
-            <div class="card-header">Detail Kuis</div>
+            <div class="card-header">Detail Soal</div>
             <div class="card-body">
                 <form id="form">
+                    <input type="hidden" name="id_kuit" value="<?= $id_kuis ?>">
                     <!-- Form Row-->
-                    <div class="row gx-3 mb-3">
-                        <!-- Form Group (judul)-->
+                    <div class=" row gx-3 mb-3">
+                        <!-- Form Group (pertanyaan)-->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Judul</label>
-                                <input type="text" class="form-control" name="judul" id="judul" placeholder="Judul">
+                                <label class="form-label">Pertanyaan</label>
+                                <textarea class="form-control" id="pertanyaan" name="pertanyaan" rows="3" placeholder="Pertanyaan"></textarea>
                             </div>
                         </div>
-                        <!-- Form Group (materi)-->
+                        <!-- Form Group (opsi 1)-->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Materi</label>
-                                <select class="form-control" name="materi" id="materi">
-                                    <option value="">Pilih Materi</option>
-                                    <?php foreach ($result as $row) { ?>
-                                        <option value="<?= $row['id_materi'] ?>"><?= $row['judul'] ?></option>
-                                    <?php } ?>
-                                </select>
+                                <label class="form-label">Opsi 1</label>
+                                <textarea class="form-control" id="opsi_1" name="opsi_1" rows="3" placeholder="Opsi 1"></textarea>
                             </div>
                         </div>
-                        <!-- Form Group (waktu)-->
+                        <!-- Form Group (nilai opsi 1)-->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Waktu</label>
-                                <input type="time" class="form-control" name="waktu" id="waktu" placeholder="Waktu">
+                                <label class="form-label">Nilai Opsi 1</label>
+                                <input type="number" class="form-control" id="nilai_opsi_1" name="nilai_opsi_1" placeholder="Nilai Opsi 1">
                             </div>
                         </div>
-                        <!-- Form Group (jumlah soal)-->
+                        <!-- Form Group (opsi 2)-->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Jumlah Soal</label>
-                                <input type="text" class="form-control" name="jumlah_soal" id="jumlah_soal" placeholder="Jumlah Soal">
+                                <label class="form-label">Opsi 2</label>
+                                <textarea class="form-control" id="opsi_2" name="opsi_2" rows="3" placeholder="Opsi 2"></textarea>
                             </div>
                         </div>
-                        <!-- Form Group (tanggal)-->
+                        <!-- Form Group (nilai opsi 2)-->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Tanggal Kuis</label>
-                                <input class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal">
+                                <label class="form-label">Nilai Opsi 2</label>
+                                <input type="number" class="form-control" id="nilai_opsi_2" name="nilai_opsi_2" placeholder="Nilai Opsi 2">
+                            </div>
+                        </div>
+                        <!-- Form Group (opsi 3)-->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Opsi 3</label>
+                                <textarea class="form-control" id="opsi_3" name="opsi_3" rows="3" placeholder="Opsi 3"></textarea>
+                            </div>
+                        </div>
+                        <!-- Form Group (nilai opsi 3)-->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Nilai Opsi 3</label>
+                                <input type="number" class="form-control" id="nilai_opsi_3" name="nilai_opsi_3" placeholder="Nilai Opsi 3">
+                            </div>
+                        </div>
+                        <!-- Form Group (opsi 4)-->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Opsi 4</label>
+                                <textarea class="form-control" id="opsi_4" name="opsi_4" rows="3" placeholder="Opsi 4"></textarea>
+                            </div>
+                        </div>
+                        <!-- Form Group (nilai opsi 4)-->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Nilai Opsi 4</label>
+                                <input type="number" class="form-control" id="nilai_opsi_4" name="nilai_opsi_4" placeholder="Nilai Opsi 4">
                             </div>
                         </div>
                     </div>
@@ -102,7 +127,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
         data += '&action=tambah';
         $.ajax({
             type: 'POST',
-            url: '<?= base_url('guru/kuis/function.php') ?>',
+            url: '<?= base_url('guru/soal/function.php') ?>',
             data: data,
             dataType: 'json',
             beforeSend: function() {
@@ -117,7 +142,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         icon: "success",
                         confirmButtonText: 'OK'
                     }).then(function() {
-                        load_list(response.url);
+                        load_list(response.message);
                         $(form)[0].reset();
                         setTimeout(function() {
                             $('#tombol_submit').prop("disabled", false);

@@ -5,6 +5,14 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
+$id_kuis = $_GET['id_kuis'];
+$sql = "SELECT * FROM tb_m_kuis WHERE id_kuis = '$id_kuis'";
+$query = $con->prepare($sql);
+$query->execute();
+$result = $query->fetch(PDO::FETCH_ASSOC);
+if (empty($result)) {
+    header('Location: ../include/404.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,14 +48,14 @@ if (!isset($_SESSION['user'])) {
                                         <div class="page-header-icon">
                                             <i data-feather="users"></i>
                                         </div>
-                                        Kuis
+                                        Soal
                                     </h1>
-                                    <div class="page-header-subtitle">List Kuis
+                                    <div class="page-header-subtitle">List Soal
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-auto mt-4">
                                     <div class="btn-group">
-                                        <a href="javascript:;" onclick="load_input('<?php base_url('guru/kuis/create.php') ?>');" class="btn btn-white">Tambah Kuis</a>
+                                        <a href="javascript:;" onclick="load_input('<?php base_url('guru/kuis/create.php') ?>');" class="btn btn-white">Tambah Guru</a>
                                     </div>
                                 </div>
                             </div>
