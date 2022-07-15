@@ -28,13 +28,13 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="javascript:;" onclick="handle_open_modal('<?= base_url('guru/kelas/edit.php?id=' . $row['id_kelas']) ?>',  '#modalListResult', '#contentListResult')" class="btn btn-warning">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-pencil"></i>
                                     </span>
                                     Ubah
                                 </a>
                                 <a href="javascript:;" onclick="hapus('<?= $row['id_kelas'] ?>', '<?= base_url('guru/kelas/function.php') ?>')" class="btn btn-danger">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                     Hapus

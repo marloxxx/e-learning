@@ -27,6 +27,7 @@ if ($_POST['action'] == 'upload') {
     }
 } elseif ($_POST['action'] == 'update') {
     $nama = htmlspecialchars($_POST['nama']);
+    $username = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
     $confirm_password = htmlspecialchars($_POST['confirm_password']);
@@ -35,6 +36,12 @@ if ($_POST['action'] == 'upload') {
         $response = array(
             'status' => 'error',
             'message' => 'Nama tidak boleh kosong'
+        );
+        echo json_encode($response);
+    } elseif (empty($username)) {
+        $response = array(
+            'status' => 'error',
+            'message' => 'Username tidak boleh kosong'
         );
         echo json_encode($response);
     } elseif (empty($email)) {
@@ -66,7 +73,7 @@ if ($_POST['action'] == 'upload') {
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 //    Update data using PDO
-                $sql = "UPDATE tb_m_admin SET nama = '$nama', email = '$email', password = '$password' WHERE id_admin = '$id'";
+                $sql = "UPDATE tb_m_admin SET nama = '$nama', username = '$username', email = '$email', password = '$password' WHERE id_admin = '$id'";
                 $query = $con->prepare($sql);
                 $query->execute();
                 if ($query) {

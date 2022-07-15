@@ -5,10 +5,14 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
-$sql = "SELECT * FROM tb_m_guru WHERE id_guru = '" . $_SESSION['user']['id'] . "'";
+$sql = "SELECT * FROM tb_m_siswa WHERE id_siswa = '" . $_SESSION['user']['id'] . "'";
 $query = $con->prepare($sql);
 $query->execute();
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+$result = $query->fetch(PDO::FETCH_ASSOC);
+$sql = "SELECT * FROM tb_m_kelas";
+$query = $con->prepare($sql);
+$query->execute();
+$kelas = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +23,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Learning | Guru</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.png" />
     <?php
     require_once('../include/head.php');
     ?>
@@ -87,22 +91,38 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <!-- Form Group (username)-->
                                     <div class="mb-3">
                                         <label class="small mb-1" for="nama">Nama</label>
-                                        <input class="form-control" id="nama" type="text" name="nama" placeholder="Nama" value="<?php echo $_SESSION['user']['nama']; ?>" />
+                                        <input class="form-control" id="nama" type="text" name="nama" placeholder="Nama" value="<?= $result['nama'] ?>">
                                     </div>
                                     <!-- Form Group (username)-->
                                     <div class="mb-3">
                                         <label class="small mb-1" for="username">Username</label>
-                                        <input class="form-control" id="username" type="text" name="username" placeholder="Username" value="<?php echo $_SESSION['user']['username']; ?>" />
+                                        <input class="form-control" id="username" type="text" name="username" placeholder="Username" value="<?= $result['username'] ?>">
                                     </div>
                                     <!-- Form Group (nip)-->
                                     <div class="mb-3">
-                                        <label class="small mb-1" for="nip">NIP</label>
-                                        <input class="form-control" id="nip" type="text" name="nip" placeholder="NIP" value="<?php echo $_SESSION['user']['nip']; ?>" />
+                                        <label class="small mb-1" for="nip">NISN</label>
+                                        <input class="form-control" id="nip" type="text" name="nisn" placeholder="NISN" value="<?= $result['nisn'] ?>">
                                     </div>
                                     <!-- Form Group (email)-->
                                     <div class="mb-3">
                                         <label class="small mb-1" for="email">Email</label>
-                                        <input class="form-control" id="email" type="email" name="email" placeholder="Email" value="<?php echo $_SESSION['user']['email']; ?>" />
+                                        <input class="form-control" id="email" type="email" name="email" placeholder="Email" value="<?= $result['email'] ?>">
+                                    </div>
+                                    <!-- Form Group (kelas)-->
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="kelas">Kelas</label>
+                                        <select class="form-control" id="kelas" name="kelas">
+                                            <option value="">Pilih Kelas</option>
+                                            <?php
+                                            foreach ($kelas as $k) {
+                                                if ($k['id_kelas'] == $result['id_kelas']) {
+                                                    echo '<option value="' . $k['id_kelas'] . '" selected>' . $k['nama'] . '</option>';
+                                                } else {
+                                                    echo '<option value="' . $k['id_kelas'] . '">' . $k['nama'] . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                     <!-- Form Group (password)-->
                                     <div class="mb-3">

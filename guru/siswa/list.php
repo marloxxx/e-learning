@@ -38,13 +38,13 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="javascript:;" onclick="load_input('<?= base_url('guru/siswa/show.php?id_siswa=' . $row['id_siswa']) ?>')" class="btn btn-info">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-eye"></i>
                                     </span>
                                     Detail
                                 </a>
                                 <a href="javascript:;" onclick="handle_open_modal('<?php base_url('guru/siswa/edit.php?id_siswa=' . $row['id_siswa']) ?>',  '#modalListResult', '#contentListResult');" class="btn btn-warning">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-edit"></i>
                                     </span>
                                     Ubah

@@ -31,7 +31,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="javascript:;" onclick="handle_open_modal('<?= base_url('guru/konten/edit.php?id_id_submateri=' . $id_submateri . '&id=' . $row['id_konten']) ?>',  '#modalListResult', '#contentListResult')" class="btn btn-warning">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-pencil"></i>
                                     </span>
                                     Ubah
@@ -43,7 +43,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 ]
                                 ?>
                                 <a href="javascript:;" onclick="hapus('<?= join(',', $id); ?>', '<?= base_url('guru/konten/function.php') ?>')" class="btn btn-danger">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                     Hapus

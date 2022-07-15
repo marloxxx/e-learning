@@ -88,10 +88,15 @@ if (!isset($_SESSION['user'])) {
                             <div class="card-header">Account Details</div>
                             <div class="card-body">
                                 <form id="profile">
-                                    <!-- Form Group (username)-->
+                                    <!-- Form Group (nama)-->
                                     <div class="mb-3">
                                         <label class="small mb-1" for="nama">Nama</label>
                                         <input class="form-control" id="nama" type="text" name="nama" placeholder="Nama" value="<?php echo $_SESSION['user']['nama']; ?>" />
+                                    </div>
+                                    <!-- Form Group (username)-->
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="username">Username</label>
+                                        <input class="form-control" id="username" type="text" name="username" placeholder="Username" value="<?php echo $_SESSION['user']['username']; ?>" />
                                     </div>
                                     <!-- Form Group (email)-->
                                     <div class="mb-3">

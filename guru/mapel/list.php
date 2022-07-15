@@ -30,19 +30,19 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="<?= base_url('guru/materi/?id_mapel=' . $row['id_mapel']) ?>" class="btn btn-primary">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-plus"></i>
                                     </span>
                                     Tambah Materi
                                 </a>
                                 <a href="javascript:;" onclick="handle_open_modal('<?= base_url('guru/mapel/edit.php?id=' . $row['id_mapel']) ?>',  '#modalListResult', '#contentListResult')" class="btn btn-warning">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-pencil"></i>
                                     </span>
                                     Ubah
                                 </a>
                                 <a href="javascript:;" onclick="hapus('<?= $row['id_mapel'] ?>', '<?= base_url('guru/mapel/function.php') ?>')" class="btn btn-danger">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                     Hapus

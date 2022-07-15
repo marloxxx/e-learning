@@ -28,7 +28,7 @@ if ($_POST['action'] == 'tambah') {
             $response = array(
                 'status' => 'success',
                 'message' => 'Berhasil menambahkan data',
-                'url' =>  BASE_URL . 'guru/mapel/list.php?id_mapel=' . $id_mapel,
+                'url' =>  BASE_URL . 'guru/materi/list.php?id_mapel=' . $id_mapel,
             );
             echo json_encode($response);
         } else {
@@ -44,10 +44,16 @@ if ($_POST['action'] == 'tambah') {
     $id_mapel = htmlspecialchars($_POST['id_mapel']);
     $judul = htmlspecialchars($_POST['judul']);
     $deskripsi = htmlspecialchars($_POST['deskripsi']);
-    if (empty($nama)) {
+    if (empty($judul)) {
         $response = array(
             'status' => 'error',
-            'message' => 'Nama tidak boleh kosong'
+            'message' => 'Judul tidak boleh kosong'
+        );
+        echo json_encode($response);
+    } elseif (empty($deskripsi)) {
+        $response = array(
+            'status' => 'error',
+            'message' => 'Deskripsi tidak boleh kosong'
         );
         echo json_encode($response);
     } else {
@@ -59,7 +65,7 @@ if ($_POST['action'] == 'tambah') {
             $response = array(
                 'status' => 'success',
                 'message' => 'Berhasil mengubah data',
-                'url' =>  BASE_URL . 'guru/mapel/list.php?id_mapel=' . $id_mapel,
+                'url' =>  BASE_URL . 'guru/materi/list.php?id_mapel=' . $id_mapel,
             );
             echo json_encode($response);
         } else {
@@ -81,7 +87,7 @@ if ($_POST['action'] == 'tambah') {
         $response = array(
             'status' => 'success',
             'message' => 'Berhasil menghapus data',
-            'url' =>  BASE_URL . 'guru/mapel/list.php?id_mapel=' . $id_mapel,
+            'url' =>  BASE_URL . 'guru/materi/list.php?id_mapel=' . $id_mapel,
         );
         echo json_encode($response);
     } else {

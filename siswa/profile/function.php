@@ -8,7 +8,7 @@ if ($_POST['action'] == 'upload') {
     $id = $_SESSION['user']['id'];
     $image = time() . '.' .  explode('.', $_FILES['photo']['name'])[1];
     move_uploaded_file($_FILES['photo']['tmp_name'], '../../assets/img/profile/' . $image);
-    $sql = "UPDATE tb_m_guru SET photo = '$image' WHERE id_guru = '$id'";
+    $sql = "UPDATE tb_m_siswa SET photo = '$image' WHERE id_siswa = '$id'";
     $query = $con->prepare($sql);
     $query->execute();
     if ($query) {
@@ -28,10 +28,11 @@ if ($_POST['action'] == 'upload') {
 } elseif ($_POST['action'] == 'update') {
     $nama = htmlspecialchars($_POST['nama']);
     $username = htmlspecialchars($_POST['username']);
-    $nip = htmlspecialchars($_POST['nip']);
+    $nisn = htmlspecialchars($_POST['nisn']);
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
     $confirm_password = htmlspecialchars($_POST['confirm_password']);
+    $kelas = htmlspecialchars($_POST['kelas']);
     $id = $_SESSION['user']['id'];
     if (empty($nama)) {
         $response = array(

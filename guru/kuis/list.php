@@ -36,19 +36,19 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="<?= base_url('guru/soal/?id_kuis=' . $row['id_kuis']) ?>" class="btn btn-primary">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-plus"></i>
                                     </span>
                                     Tambah Soal
                                 </a>
                                 <a href="javascript:;" onclick="load_input('<?= base_url('guru/kuis/edit.php?id=' . $row['id_guru']) ?>')" class="btn btn-warning">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-pencil"></i>
                                     </span>
                                     Ubah
                                 </a>
                                 <a href="javascript:;" onclick="hapus('<?= $row['id_guru'] ?>', '<?= base_url('guru/kuis/function.php') ?>')" class="btn btn-danger">
-                                    <span class="symbol-btn-group">
+                                    <span class="symbol-btn-group me-2">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                     Hapus

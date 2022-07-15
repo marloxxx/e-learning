@@ -6,18 +6,25 @@
                     <!-- Sidenav Menu Heading (Core)-->
                     <div class="sidenav-menu-heading">Main</div>
                     <!-- Sidenav Link (Dashboard)-->
-                    <a class="nav-link" href="<?php base_url('admin/dashboard'); ?>">
+                    <a class="nav-link" href="<?php base_url('siswa/dashboard'); ?>">
                         <div class="nav-link-icon">
                             <i data-feather="home"></i>
                         </div>
                         Dashboards
                     </a>
-                    <!-- Sidenav Link (Guru)-->
-                    <a class="nav-link" href="<?php base_url('admin/guru'); ?>">
+                    <!-- Sidenav Link (mapel)-->
+                    <a class="nav-link" href="<?php base_url('siswa/mapel'); ?>">
                         <div class="nav-link-icon">
-                            <i data-feather="users"></i>
+                            <i class="fas fa-book"></i>
                         </div>
-                        Guru
+                        Mata Pelajaran
+                    </a>
+                    <!-- Sidenav Link (kuis)-->
+                    <a class="nav-link" href="<?php base_url('siswa/kuis'); ?>">
+                        <div class="nav-link-icon">
+                            <i data-feather="file-text"></i>
+                        </div>
+                        Kuis
                     </a>
                 </div>
             </div>
