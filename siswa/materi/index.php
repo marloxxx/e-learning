@@ -84,13 +84,13 @@ $judul_mapel = relation('tb_m_mapel', 'id_mapel', $id)['nama'];
                                         <td><?= substr($row['deskripsi'], 0, 100); ?></td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="<?= base_url('siswa/submateri/?id_materi=' . $row['id_materi'] . '&id_mapel=' . $id) ?>" class="btn btn-info">
+                                                <a href="<?= base_url('siswa/submateri/?id_materi=' . $row['id_materi']) ?>" class="btn btn-info">
                                                     <span class="symbol-btn-group me-2">
                                                         <i class="fas fa-eye"></i>
                                                     </span>
                                                     Lihat Sub Materi
                                                 </a>
-                                                <a href="<?= base_url('siswa/kuis/?id_materi=' . $row['id_materi'] . '&id_mapel=' . $id) ?>" class="btn btn-success">
+                                                <a href="<?= base_url('siswa/kuis/?id_materi=' . $row['id_materi']) ?>" class="btn btn-success">
                                                     <span class="symbol-btn-group me-2">
                                                         <i data-feather="file-text"></i>
                                                     </span>

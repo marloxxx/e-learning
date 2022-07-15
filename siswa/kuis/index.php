@@ -5,15 +5,15 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
-$id = $_GET['id_mapel'];
-$sql = "SELECT * FROM tb_m_materi WHERE id_mapel = '$id'";
+if (isset($_GET['id_materi'])) {
+    $id_materi = $_GET['id_materi'];
+    $sql = "SELECT * FROM tb_m_kuis WHERE id_materi = '$id_materi'";
+} else {
+    $sql = "SELECT * FROM tb_m_kuis";
+}
 $query = $con->prepare($sql);
 $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
-if (empty($result) == true) {
-    header('Location: ../include/404.php');
-}
-$judul_mapel = relation('tb_m_mapel', 'id_mapel', $id)['nama'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,9 +47,9 @@ $judul_mapel = relation('tb_m_mapel', 'id_mapel', $id)['nama'];
                                     <div class="page-header-icon">
                                         <i class="fas fa-book"></i>
                                     </div>
-                                    <?= $judul_mapel ?>
+                                    Kuis
                                 </h1>
-                                <div class="page-header-subtitle">List Materi
+                                <div class="page-header-subtitle">List Kuis
                                 </div>
                             </div>
                             <div class="col-12 col-xl-auto mt-4">
@@ -62,14 +62,17 @@ $judul_mapel = relation('tb_m_mapel', 'id_mapel', $id)['nama'];
             <!-- Main page content-->
             <div class="container-xl px-4 mt-n10">
                 <div class="card mb-4">
-                    <div class="card-header">List Materi</div>
+                    <div class="card-header">List Kuis</div>
                     <div class="card-body">
                         <table id="datatables" class="table" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Judul Kuis</th>
                                     <th>Judul Materi</th>
-                                    <th>Deskripsi</th>
+                                    <th>Jumlah Soal</th>
+                                    <th>Waktu</th>
+                                    <th>Waktu Mulai</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -81,21 +84,21 @@ $judul_mapel = relation('tb_m_mapel', 'id_mapel', $id)['nama'];
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['judul']; ?></td>
-                                        <td><?= substr($row['deskripsi'], 0, 100); ?></td>
+                                        <td><?= relation('tb_m_materi', 'id_materi', $row['id_materi'],); ?></td>
+                                        <td><?= $row['jumlah']; ?></td>
+                                        <td><?= $row['waktu']; ?></td>
+                                        <td><?= $row['waktu_mulai']; ?></td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="<?= base_url('siswa/submateri/?id_materi=' . $row['id_materi'] . '&id_mapel=' . $id) ?>" class="btn btn-info">
-                                                    <span class="symbol-btn-group me-2">
-                                                        <i class="fas fa-eye"></i>
-                                                    </span>
-                                                    Lihat Sub Materi
-                                                </a>
-                                                <a href="<?= base_url('siswa/kuis/?id_materi=' . $row['id_materi'] . '&id_mapel=' . $id) ?>" class="btn btn-info">
-                                                    <span class="symbol-btn-group me-2">
-                                                        <i class="fas fa-eye"></i>
-                                                    </span>
-                                                    Lihat Kuis
-                                                </a>
+                                                <?php
+                                                $now = date('Y-m-d H:i:s');
+                                                if ($row['waktu_mulai'] >= $now) {
+                                                ?>
+                                                    <!-- Masuk Kuis -->
+                                                    <a href="soal.php?id_kuis=<?= $row['id_kuis']; ?>" class="btn btn-primary">Masuk Kuis</a>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </td>
                                     </tr>
