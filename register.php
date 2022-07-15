@@ -48,44 +48,26 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                         <!-- Form Group (name)-->
                                         <div class="mb-3">
                                             <label class="small mb-1" for="name">Nama</label>
-                                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter first name" />
+                                            <input class="form-control" id="nama" name="nama" type="text" placeholder="Enter first name" />
+                                        </div>
+                                        <!-- Form Group (username)-->
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="username">Username</label>
+                                            <input class="form-control" id="username" name="username" type="text" placeholder="Enter username" />
                                         </div>
                                         <!-- Form Group (nisn)-->
-                                        <div class="mb-3">
-                                            <label class="small mb-1" for="nisn">NISN</label>
-                                            <input class="form-control" id="nisn" name="nisn" type="text" placeholder="Enter NISN" />
-                                        </div>
+
                                         <!-- Form Group (email)-->
                                         <div class="mb-3">
                                             <label class="small mb-1" for="email">Email</label>
                                             <input class="form-control" id="email" type="email" name="email" placeholder="Enter email address" />
                                         </div>
-                                        <!-- Form Row    -->
-                                        <div class="row gx-3">
-                                            <div class="col-md-6">
-                                                <!-- Form Group (password)-->
-                                                <div class="mb-3">
-                                                    <label class="small mb-1" for="password">Password</label>
-                                                    <input class="form-control" id="password" type="password" name="password" placeholder="Enter password" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <!-- Form Group (confirm password)-->
-                                                <div class="mb-3">
-                                                    <label class="small mb-1" for="confirm-password">Confirm Password</label>
-                                                    <input class="form-control" id="confirm-password" type="password" name="confirm-password" placeholder="Confirm password" />
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="row gx-3">
                                             <div class="col-md-6">
                                                 <!-- Form Group (jenis kelamin)-->
                                                 <div class="mb-3">
-                                                    <label class="small mb-1" for="jenis-kelamin">Jenis Kelamin</label>
-                                                    <select class="form-control" id="jenis-kelamin" name="jk">
-                                                        <option value="Laki-laki">Laki-laki</option>
-                                                        <option value="Perempuan">Perempuan</option>
-                                                    </select>
+                                                    <label class="small mb-1" for="nisn">NISN</label>
+                                                    <input class="form-control" id="nisn" name="nisn" type="text" placeholder="Enter NISN" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -102,8 +84,29 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- Form Row    -->
+                                        <div class="row gx-3">
+                                            <div class="col-md-6">
+                                                <!-- Form Group (password)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="password">Password</label>
+                                                    <input class="form-control" id="password" type="password" name="password" placeholder="Enter password" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <!-- Form Group (confirm password)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="confirm-password">Confirm Password</label>
+                                                    <input class="form-control" id="confirm_password" type="password" name="confirm_password" placeholder="Confirm password" />
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <!-- Form Group (create account submit)-->
-                                        <a class="btn btn-primary btn-block" href="auth-login-basic.html">Create Account</a>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <!-- <a class="small" href="forget.php">Forgot Password?</a> -->
+                                            <button type="submit" class="btn btn-primary">Daftar</button>
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
@@ -150,7 +153,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             confirmButton: "btn btn-primary"
                         }
                     }).then(function() {
-                        location.href = response.redirect;
+                        location.href = response.url;
                     });
                 } else {
                     Swal.fire({

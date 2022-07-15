@@ -1,4 +1,5 @@
 <?php
+require_once('koneksi.php');
 require_once('function.php');
 global $con;
 header('Content-Type: application/json');
@@ -82,14 +83,15 @@ if (empty($nama)) {
                 );
                 echo json_encode($response);
             } else {
-                $sql = "INSERT INTO tb_m_siswa (nama, username, nisn, email, password, kelas_id) VALUES ('$nama', '$username', '$nisn', '$email', '$password', '$kelas')";
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $sql = "INSERT INTO tb_m_siswa (nama, username, nisn, email, password, id_kelas) VALUES ('$nama', '$username', '$nisn', '$email', '$password', '$kelas')";
                 $query = $con->prepare($sql);
                 $query->execute();
                 if ($query) {
                     $response = array(
                         'status' => 'success',
                         'message' => 'Pendaftaran berhasil',
-                        'url' => BASE_URL . 'login.php'
+                        'url' => BASE_URL
                     );
                     echo json_encode($response);
                 } else {

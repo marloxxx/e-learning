@@ -10,7 +10,7 @@ $sql = "SELECT * FROM tb_m_materi WHERE id_materi = '$id_materi'";
 $query = $con->prepare($sql);
 $query->execute();
 $result = $query->fetch(PDO::FETCH_ASSOC);
-if (empty($result)) {
+if (empty($result) == true) {
     header('Location: ../include/404.php');
 }
 ?>

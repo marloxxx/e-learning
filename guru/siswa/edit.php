@@ -5,31 +5,30 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
-$id_mapel = $_GET['id_mapel'];
-$id = $_GET['id'];
-$sql = "SELECT * FROM tb_m_materi WHERE id_materi = '$id'";
+$id_siswa = $_GET['id_siswa'];
+$sql = "SELECT * FROM tb_m_siswa WHERE id_siswa = '$id_siswa'";
 $query = $con->prepare($sql);
 $query->execute();
 $result = $query->fetch(PDO::FETCH_ASSOC);
 ?>
 <form id="form">
-    <input type="hidden" name="id_mapel" value="<?= $id_mapel ?>">
-    <input type="hidden" name="id" value="<?= $id ?>">
+    <input type="hidden" name="id_siswa" value="<?= $result['id_siswa'] ?>">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Mata Pelajaran</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update Status Siswa</h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12">
-                <label class="small mb-1" for="status">Judul Materi</label>
-                <input class="form-control" id="judul" name="judul" type="text" placeholder="Judul Materi" value="<?= $result['judul'] ?>">
-            </div>
-            <div class="col-md-12">
-                <label class="small mb-1" for="status">Deskripsi Materi</label>
-                <textarea class="form-control" id="deskripsi" name="deskripsi" type="text" placeholder="Deskripsi Materi"><?= $result['deskripsi'] ?></textarea>
-            </div>
-        </div>
+        <label class="small mb-1" for="status">Status</label>
+        <select class="form-control" id="status" name="status">
+            <option value="">Pilih Status</option>
+            <option value="aktif" <?php if ($result['status'] == 'aktif') {
+                                        echo 'selected';
+                                    } ?>>Aktif</option>
+            <option value="nonaktif" <?php if ($result['status'] == 'nonaktif') {
+                                            echo 'selected';
+                                        } ?>>Non Aktif</option>
+
+        </select>
     </div>
     <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
@@ -40,10 +39,10 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
     $('#form').submit(function(e) {
         e.preventDefault();
         var data = $('#form').serialize();
-        data += '&action=edit';
+        data += '&action=update';
         $.ajax({
             type: 'POST',
-            url: '<?= base_url('guru/materi/function.php') ?>',
+            url: '<?= base_url('guru/siswa/function.php') ?>',
             data: data,
             dataType: 'json',
             beforeSend: function() {

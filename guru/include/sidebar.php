@@ -33,6 +33,13 @@
                         </div>
                         Kuis
                     </a>
+                    <!-- Sidenav Link (Siswa)-->
+                    <a class="nav-link" href="<?php base_url('guru/siswa'); ?>">
+                        <div class="nav-link-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        Siswa
+                    </a>
                 </div>
             </div>
             <!-- Sidenav Footer-->

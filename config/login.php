@@ -21,12 +21,11 @@ if (empty($username)) {
     echo json_encode($response);
 } else {
     if ($role == 'siswa') {
-        $sql = "SELECT * FROM tb_m_siswa JOIN tb_m_kelas ON tb_m_siswa.id_kelas = tb_m_kelas.id_kelas WHERE username = :username";
+        $sql = "SELECT * FROM tb_m_siswa WHERE username = '$username'";
         $query = $con->prepare($sql);
-        $query->bindParam(':username', $username);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if ($query->rowCount() > 0) {
+        if (!empty($result)) {
             if ($result['status'] == 'aktif') {
                 if (password_verify($password, $result['password'])) {
                     $_SESSION['user'] = array(
@@ -36,7 +35,6 @@ if (empty($username)) {
                         'nisn' => $result['nisn'],
                         'email' => $result['email'],
                         'id_kelas' => $result['id_kelas'],
-                        'nama_kelas' => $result['nama_kelas'],
                         'photo' => $result['photo'],
                         'role' => $role
                     );
@@ -53,10 +51,16 @@ if (empty($username)) {
                     );
                     echo json_encode($response);
                 }
+            } elseif ($result['status'] == 'menunggu') {
+                $response = array(
+                    'status' => 'error',
+                    'message' => 'Akun anda belum aktif'
+                );
+                echo json_encode($response);
             } else {
                 $response = array(
                     'status' => 'error',
-                    'message' => 'Username tidak ditemukan'
+                    'message' => 'Akun anda ditolak'
                 );
                 echo json_encode($response);
             }
@@ -73,7 +77,7 @@ if (empty($username)) {
         $query->bindParam(':username', $username);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if ($query->rowCount() > 0) {
+        if (empty($result) == false) {
             if (password_verify($password, $result['password'])) {
                 $_SESSION['user'] = array(
                     'id' => $result['id_guru'],
@@ -110,7 +114,7 @@ if (empty($username)) {
         $query->bindParam(':username', $username);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if ($query->rowCount() > 0) {
+        if (empty($result) == false) {
             if (password_verify($password, $result['password'])) {
                 $_SESSION['user'] = array(
                     'id' => $result['id_admin'],

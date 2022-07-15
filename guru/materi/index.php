@@ -10,7 +10,7 @@ $sql = "SELECT * FROM tb_m_mapel WHERE id_mapel = '$id'";
 $query = $con->prepare($sql);
 $query->execute();
 $result = $query->fetch(PDO::FETCH_ASSOC);
-if (empty($result)) {
+if (empty($result) == true) {
     header('Location: ../include/404.php');
 }
 ?>

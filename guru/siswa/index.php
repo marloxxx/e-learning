@@ -5,14 +5,6 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
-$id_submateri = $_GET['id_submateri'];
-$sql = "SELECT * FROM tb_r_submateri WHERE id_submateri = '$id_submateri'";
-$query = $con->prepare($sql);
-$query->execute();
-$result = $query->fetch(PDO::FETCH_ASSOC);
-if (empty($result) == true) {
-    header('Location: ../include/404.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +16,7 @@ if (empty($result) == true) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Learning | Guru</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <?php
     require_once('../include/head.php');
     ?>
@@ -45,16 +38,16 @@ if (empty($result) == true) {
                                 <div class="col-auto mt-4">
                                     <h1 class="page-header-title">
                                         <div class="page-header-icon">
-                                            <i class="fas fa-book"></i>
+                                            <i data-feather="users"></i>
                                         </div>
-                                        Konten
+                                        Kuis
                                     </h1>
-                                    <div class="page-header-subtitle">List Konten
+                                    <div class="page-header-subtitle">List Kuis
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-auto mt-4">
                                     <div class="btn-group">
-                                        <a href="javascript:;" onclick="handle_open_modal('<?php base_url('guru/konten/create.php?id_submateri=' . $id_submateri) ?>',  '#modalListResult', '#contentListResult');" class="btn btn-white">Tambah Konten</a>
+                                        <a href="javascript:;" onclick="load_input('<?php base_url('guru/kuis/create.php') ?>');" class="btn btn-white">Tambah Kuis</a>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +71,9 @@ if (empty($result) == true) {
     require_once('../include/modal.php');
     require_once('../include/script.php');
     ?>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        load_list('<?php base_url("guru/konten/list.php?id_submateri=" . $id_submateri); ?>');
+        load_list('<?php base_url("guru/siswa/list.php"); ?>');
     </script>
 </body>
 
