@@ -127,9 +127,10 @@ function logout()
 }
 function relation($table, $id, $field)
 {
-    global $mysqli;
+    global $con;
     $sql = "SELECT * FROM $table WHERE $field = $id";
-    $query = $mysqli->query($sql);
-    $row = $query->fetch_array();
-    return $row;
+    $query = $con->query($sql);
+    $query->execute();
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    return $data;
 }

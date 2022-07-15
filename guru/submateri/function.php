@@ -41,7 +41,7 @@ if ($_POST['action'] == 'tambah') {
     }
 } elseif ($_POST['action'] == 'edit') {
     $id = htmlspecialchars($_POST['id']);
-    $id_material = htmlspecialchars($_POST['id_material']);
+    $id_materi = htmlspecialchars($_POST['id_materi']);
     $judul = htmlspecialchars($_POST['judul']);
     $deskripsi = htmlspecialchars($_POST['deskripsi']);
     if (empty($nama)) {
@@ -59,7 +59,7 @@ if ($_POST['action'] == 'tambah') {
             $response = array(
                 'status' => 'success',
                 'message' => 'Berhasil mengubah data',
-                'url' =>  BASE_URL . 'guru/submateri/list.php?id_materi=' . $id_material,
+                'url' =>  BASE_URL . 'guru/submateri/list.php?id_materi=' . $id_materi,
             );
             echo json_encode($response);
         } else {
@@ -71,8 +71,8 @@ if ($_POST['action'] == 'tambah') {
         }
     }
 } elseif ($_POST['action'] == 'hapus') {
-    $id = htmlspecialchars($_POST['id']['id']);
-    $id_materi = htmlspecialchars($_POST['id']['id_materi']);
+    $id = htmlspecialchars($_POST['id'][0]);
+    $id_materi = htmlspecialchars($_POST['id'][1]);
     //   Delete data using PDO
     $sql = "DELETE FROM tb_r_submateri WHERE id_submateri = '$id'";
     $query = $con->prepare($sql);
@@ -81,7 +81,7 @@ if ($_POST['action'] == 'tambah') {
         $response = array(
             'status' => 'success',
             'message' => 'Berhasil menghapus data',
-            'url' =>  BASE_URL . 'guru/submateri/list.php?id_materi=' . $id_material,
+            'url' =>  BASE_URL . 'guru/submateri/list.php?id_materi=' . $id_materi,
         );
         echo json_encode($response);
     } else {

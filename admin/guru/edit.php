@@ -24,7 +24,7 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
                                     <line x1="20" y1="8" x2="20" y2="14"></line>
                                     <line x1="23" y1="11" x2="17" y2="11"></line>
                                 </svg></div>
-                            Tambah Guru
+                            Edit Guru
                         </h1>
                     </div>
                     <div class="col-12 col-xl-auto mb-3">
@@ -81,7 +81,7 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
                             <input class="form-control" id="confirm_password" name="confirm_password" type="password" placeholder="Konfirmasi Password" />
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="edit">Ubah</button>
+                    <button class="btn btn-primary" type="submit" id="tombol_submit">Simpan</button>
                 </form>
             </div>
         </div>
@@ -99,8 +99,8 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
                 data: data,
                 dataType: 'json',
                 beforeSend: function() {
-                    $('button').prop("disabled", true);
-                    $('button').text('Please wait...');
+                    $('#tombol_submit').prop("disabled", true);
+                    $('#tombol_submit').text('Please wait...');
                 },
                 success: function(response) {
                     if (response.status == "success") {
@@ -113,8 +113,8 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
                             load_list('<?= base_url('admin/guru/list.php') ?>');
                             $(form)[0].reset();
                             setTimeout(function() {
-                                $('button').prop("disabled", false);
-                                $('button').html('Simpan');
+                                $('#tombol_submit').prop("disabled", false);
+                                $('#tombol_submit').html('Simpan');
                                 back();
                             }, 2000);
                         });
@@ -126,8 +126,8 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
                             confirmButtonText: 'OK'
                         });
                         setTimeout(function() {
-                            $('button').prop("disabled", false);
-                            $('button').html('Simpan');
+                            $('#tombol_submit').prop("disabled", false);
+                            $('#tombol_submit').html('Simpan');
                         }, 2000);
                     }
                 }

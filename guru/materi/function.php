@@ -71,8 +71,8 @@ if ($_POST['action'] == 'tambah') {
         }
     }
 } elseif ($_POST['action'] == 'hapus') {
-    $id = htmlspecialchars($_POST['id']['id']);
-    $id_mapel = htmlspecialchars($_POST['id']['id_mapel']);
+    $id = htmlspecialchars($_POST['id'][0]);
+    $id_mapel = htmlspecialchars($_POST['id'][1]);
     //   Delete data using PDO
     $sql = "DELETE FROM tb_m_materi WHERE id_materi = '$id'";
     $query = $con->prepare($sql);

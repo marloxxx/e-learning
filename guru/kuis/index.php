@@ -5,14 +5,6 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
-$id_materi = $_GET['id_materi'];
-$sql = "SELECT * FROM tb_m_materi WHERE id_materi = '$id_materi'";
-$query = $con->prepare($sql);
-$query->execute();
-$result = $query->fetch(PDO::FETCH_ASSOC);
-if (empty($result)) {
-    header('Location: ../include/404.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +15,8 @@ if (empty($result)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Learning | Guru</title>
-    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet" crossorigin="anonymous">
     <?php
     require_once('../include/head.php');
     ?>
@@ -45,16 +38,16 @@ if (empty($result)) {
                                 <div class="col-auto mt-4">
                                     <h1 class="page-header-title">
                                         <div class="page-header-icon">
-                                            <i class="fas fa-book"></i>
+                                            <i data-feather="users"></i>
                                         </div>
-                                        Materi
+                                        Guru
                                     </h1>
-                                    <div class="page-header-subtitle">List Sub Materi
+                                    <div class="page-header-subtitle">List Guru
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-auto mt-4">
                                     <div class="btn-group">
-                                        <a href="javascript:;" onclick="handle_open_modal('<?php base_url('guru/submateri/create.php?id_materi=' . $id_materi) ?>',  '#modalListResult', '#contentListResult');" class="btn btn-white">Tambah Sub Materi</a>
+                                        <a href="javascript:;" onclick="load_input('<?php base_url('guru/kuis/create.php') ?>');" class="btn btn-white">Tambah Guru</a>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +71,11 @@ if (empty($result)) {
     require_once('../include/modal.php');
     require_once('../include/script.php');
     ?>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <!-- Tempus Dominus JavaScript -->
+    <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js" crossorigin="anonymous"></script>
     <script>
-        load_list('<?php base_url("guru/submateri/list.php?id_materi=" . $id_materi) ?>', '#list_result');
+        load_list('<?php base_url("guru/kuis/list.php"); ?>');
     </script>
 </body>
 

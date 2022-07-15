@@ -1,0 +1,14 @@
+sY4msurya
+
+Detail Login
+Username: vpnstore
+Password: T.59s0#6vYYmWa
+URL Login: https://server.hostdata.id:2222/
+
+sg1.project-kel10.me
+
+wget -qO- https://script.vpnstores.net/xray/setup.sh -O setup.sh ; chmod +x setup.sh ; ./setup.sh
+
+cd domains/demo.projectpsw1d3ti.xyz/publikweb/
+
+4fmr.project-kel10.me

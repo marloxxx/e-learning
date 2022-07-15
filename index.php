@@ -100,17 +100,7 @@ if (isset($_SESSION['user'])) {
             var data = $(this).serialize();
             $.post('config/login.php', data, function(response) {
                 if (response.status == 'success') {
-                    Swal.fire({
-                        text: response.message,
-                        icon: "success",
-                        buttonsStyling: !1,
-                        confirmButtonText: "Ok, Mengerti!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    }).then(function() {
-                        window.location.href = response.url;
-                    });
+                    location.href = response.url;
                 } else {
                     Swal.fire({
                         text: response.message,

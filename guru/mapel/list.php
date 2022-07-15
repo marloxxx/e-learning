@@ -26,7 +26,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $row['nama']; ?></td>
-                        <td><?php echo relation($row['id_kelas'], 'tb_m_kelas', 'id_kelas')['nama']; ?></td>
+                        <td><?php echo relation('tb_m_kelas', 'id_kelas', $row['id_kelas'])['nama']; ?></td>
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="<?= base_url('guru/materi/?id_mapel=' . $row['id_mapel']) ?>" class="btn btn-primary">

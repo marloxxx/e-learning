@@ -6,6 +6,13 @@ if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
 $id_submateri = $_GET['id_submateri'];
+$sql = "SELECT * FROM tb_r_submateri WHERE id_submateri = '$id_submateri'";
+$query = $con->prepare($sql);
+$query->execute();
+$result = $query->fetch(PDO::FETCH_ASSOC);
+if (empty($result)) {
+    header('Location: ../include/404.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

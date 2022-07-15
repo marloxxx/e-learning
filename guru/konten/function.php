@@ -73,8 +73,8 @@ if ($_POST['action'] == 'tambah') {
         }
     }
 } elseif ($_POST['action'] == 'hapus') {
-    $id = htmlspecialchars($_POST['id']['id']);
-    $id_submateri = htmlspecialchars($_POST['id']['id_submateri']);
+    $id = htmlspecialchars($_POST['id'][0]);
+    $id_submateri = htmlspecialchars($_POST['id'][1]);
     //   Delete data using PDO
     $sql = "DELETE FROM tb_d_konten WHERE id_kontent = '$id'";
     $query = $con->prepare($sql);

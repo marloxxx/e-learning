@@ -8,13 +8,14 @@ $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="card mb-4">
-    <div class="card-header">List Kelas</div>
+    <div class="card-header">List Konten</div>
     <div class="card-body">
         <table id="datatables" class="table" style="width: 100%">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Kelas</th>
+                    <th>Judul</th>
+                    <th>File Konten</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -25,7 +26,8 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                 ?>
                     <tr>
                         <td><?php echo $no++; ?></td>
-                        <td><?php echo $row['nama']; ?></td>
+                        <td><?php echo $row['judul']; ?></td>
+                        <td><?php echo $row['file']; ?></td>
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="javascript:;" onclick="handle_open_modal('<?= base_url('guru/konten/edit.php?id_id_submateri=' . $id_submateri . '&id=' . $row['id_konten']) ?>',  '#modalListResult', '#contentListResult')" class="btn btn-warning">
@@ -34,7 +36,13 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     </span>
                                     Ubah
                                 </a>
-                                <a href="javascript:;" onclick="hapus('<?= [$row['id_konten'], $id_submateri] ?>', '<?= base_url('guru/konten/function.php') ?>')" class="btn btn-danger">
+                                <?php
+                                $id = [
+                                    'id_konten' => $row['id_konten'],
+                                    'id_submateri' => $id_submateri
+                                ]
+                                ?>
+                                <a href="javascript:;" onclick="hapus('<?= join(',', $id); ?>', '<?= base_url('guru/konten/function.php') ?>')" class="btn btn-danger">
                                     <span class="symbol-btn-group">
                                         <i class="fa fa-trash"></i>
                                     </span>

@@ -16,7 +16,7 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
     <input type="hidden" name="id_mapel" value="<?= $id_mapel ?>">
     <input type="hidden" name="id" value="<?= $id ?>">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Pelajaran</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Mata Pelajaran</h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
@@ -33,7 +33,7 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
     </div>
     <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-        <button class="btn btn-primary" type="submit">Simpan</button>
+        <button class="btn btn-primary" type="submit" id="tombol_submit">Simpan</button>
     </div>
 </form>
 <script>

@@ -150,7 +150,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             confirmButton: "btn btn-primary"
                         }
                     }).then(function() {
-                        window.location.href = response.redirect;
+                        location.href = response.redirect;
                     });
                 } else {
                     Swal.fire({

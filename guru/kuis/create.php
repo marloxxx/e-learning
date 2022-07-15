@@ -5,6 +5,10 @@ require_once('../../config/function.php');
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
+$sql = "SELECT * FROM tb_m_materi";
+$query = $con->prepare($sql);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <main>
     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
@@ -19,7 +23,7 @@ if (!isset($_SESSION['user'])) {
                                     <line x1="20" y1="8" x2="20" y2="14"></line>
                                     <line x1="23" y1="11" x2="17" y2="11"></line>
                                 </svg></div>
-                            Tambah Guru
+                            Tambah Kuis
                         </h1>
                     </div>
                     <div class="col-12 col-xl-auto mb-3">
@@ -39,40 +43,50 @@ if (!isset($_SESSION['user'])) {
     <div class="container-xl px-4 mt-4">
         <!-- Account details card-->
         <div class="card mb-4">
-            <div class="card-header">Account Details</div>
+            <div class="card-header">Detail Kuis</div>
             <div class="card-body">
                 <form id="form">
                     <!-- Form Row-->
                     <div class="row gx-3 mb-3">
-                        <!-- Form Group (nama)-->
+                        <!-- Form Group (judul)-->
                         <div class="col-md-12">
-                            <label class="small mb-1" for="nama">Nama</label>
-                            <input class="form-control" id="nama" name="nama" type="text" placeholder="Nama">
+                            <div class="form-group">
+                                <label class="form-label">Judul</label>
+                                <input type="text" class="form-control" name="judul" id="judul" placeholder="Judul">
+                            </div>
                         </div>
-                        <!-- Form Group (username)-->
+                        <!-- Form Group (materi)-->
                         <div class="col-md-12">
-                            <label class="small mb-1" for="username">Username</label>
-                            <input class="form-control" id="username" name="username" type="text" placeholder="Username">
+                            <div class="form-group">
+                                <label class="form-label">Materi</label>
+                                <select class="form-control" name="materi" id="materi">
+                                    <option value="">Pilih Materi</option>
+                                    <?php foreach ($result as $row) { ?>
+                                        <option value="<?= $row['id_materi'] ?>"><?= $row['judul'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
                         </div>
-                        <!-- Form Group (nip)-->
+                        <!-- Form Group (waktu)-->
                         <div class="col-md-12">
-                            <label class="small mb-1" for="nip">NIP</label>
-                            <input class="form-control" id="nip" name="nip" type="text" placeholder="NIP">
+                            <div class="form-group">
+                                <label class="form-label">Waktu</label>
+                                <input type="time" class="form-control" name="waktu" id="waktu" placeholder="Waktu">
+                            </div>
                         </div>
-                        <!-- Form Group (email)-->
+                        <!-- Form Group (jumlah soal)-->
                         <div class="col-md-12">
-                            <label class="small mb-1" for="email">Email</label>
-                            <input class="form-control" id="email" name="email" type="email" placeholder="Email">
+                            <div class="form-group">
+                                <label class="form-label">Jumlah Soal</label>
+                                <input type="text" class="form-control" name="jumlah_soal" id="jumlah_soal" placeholder="Jumlah Soal">
+                            </div>
                         </div>
-                        <!-- Form Group (password)-->
+                        <!-- Form Group (tanggal)-->
                         <div class="col-md-12">
-                            <label class="small mb-1" for="password">Password</label>
-                            <input class="form-control" id="password" name="password" type="password" placeholder="Password">
-                        </div>
-                        <!-- Form Group (password)-->
-                        <div class="col-md-12">
-                            <label class="small mb-1" for="password">Konfirmasi Password</label>
-                            <input class="form-control" id="confirm_password" name="confirm_password" type="password" placeholder="Konfirmasi Password">
+                            <div class="form-group">
+                                <label class="form-label">Tanggal</label>
+                                <input class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal">
+                            </div>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit" id="tombol_submit">Simpan</button>
@@ -88,7 +102,7 @@ if (!isset($_SESSION['user'])) {
         data += '&action=tambah';
         $.ajax({
             type: 'POST',
-            url: '<?= base_url('admin/guru/function.php') ?>',
+            url: '<?= base_url('guru/kuis/function.php') ?>',
             data: data,
             dataType: 'json',
             beforeSend: function() {
@@ -103,7 +117,7 @@ if (!isset($_SESSION['user'])) {
                         icon: "success",
                         confirmButtonText: 'OK'
                     }).then(function() {
-                        load_list('<?= base_url('admin/guru/list.php') ?>');
+                        load_list('<?= base_url('guru/kuis/list.php') ?>');
                         $(form)[0].reset();
                         setTimeout(function() {
                             $('#tombol_submit').prop("disabled", false);
@@ -126,4 +140,5 @@ if (!isset($_SESSION['user'])) {
             }
         });
     });
+    const picker = new tempusdominus.TempusDominus(document.getElementById('tanggal'));
 </script>

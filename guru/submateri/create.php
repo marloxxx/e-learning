@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 $id_materi = $_GET['id_materi'];
 ?>
 <form id="form">
-    <input type="hidden" name="id_mapel" id="id_mapel" value="<?= $id_mapel ?>">
+    <input type="hidden" name="id_materi" id="id_materi" value="<?= $id_materi ?>">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Tambah Sub Materi</h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -27,7 +27,7 @@ $id_materi = $_GET['id_materi'];
     </div>
     <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-        <button class="btn btn-primary" type="submit">Simpan</button>
+        <button class="btn btn-primary" type="submit" id="tombol_submit">Simpan</button>
     </div>
 </form>
 <script>
@@ -37,12 +37,12 @@ $id_materi = $_GET['id_materi'];
         data += '&action=tambah';
         $.ajax({
             type: 'POST',
-            url: '<?= base_url('guru/materi/function.php') ?>',
+            url: '<?= base_url('guru/submateri/function.php') ?>',
             data: data,
             dataType: 'json',
             beforeSend: function() {
-                $('button').prop("disabled", true);
-                $('button').text('Please wait...');
+                $('#tombol_submit').prop("disabled", true);
+                $('#tombol_submit').text('Please wait...');
             },
             success: function(response) {
                 if (response.status == "success") {
@@ -56,8 +56,8 @@ $id_materi = $_GET['id_materi'];
                         $(form)[0].reset();
                         $('#modalListResult').modal('hide');
                         setTimeout(function() {
-                            $('button').prop("disabled", false);
-                            $('button').html('Simpan');
+                            $('#tombol_submit').prop("disabled", false);
+                            $('#tombol_submit').html('Simpan');
                             back();
                         }, 2000);
                     });
@@ -69,8 +69,8 @@ $id_materi = $_GET['id_materi'];
                         confirmButtonText: 'OK'
                     });
                     setTimeout(function() {
-                        $('button').prop("disabled", false);
-                        $('button').html('Simpan');
+                        $('#tombol_submit').prop("disabled", false);
+                        $('#tombol_submit').html('Simpan');
                     }, 2000);
                 }
             }

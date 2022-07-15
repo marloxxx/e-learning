@@ -27,7 +27,7 @@ $id_mapel = $_GET['id_mapel'];
     </div>
     <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-        <button class="btn btn-primary" type="submit">Simpan</button>
+        <button class="btn btn-primary" type="submit" id="tombol_submit">Simpan</button>
     </div>
 </form>
 <script>
@@ -41,8 +41,8 @@ $id_mapel = $_GET['id_mapel'];
             data: data,
             dataType: 'json',
             beforeSend: function() {
-                $('button').prop("disabled", true);
-                $('button').text('Please wait...');
+                $('#tombol_submit').prop("disabled", true);
+                $('#tombol_submit').text('Please wait...');
             },
             success: function(response) {
                 if (response.status == "success") {
@@ -56,8 +56,8 @@ $id_mapel = $_GET['id_mapel'];
                         $(form)[0].reset();
                         $('#modalListResult').modal('hide');
                         setTimeout(function() {
-                            $('button').prop("disabled", false);
-                            $('button').html('Simpan');
+                            $('#tombol_submit').prop("disabled", false);
+                            $('#tombol_submit').html('Simpan');
                             back();
                         }, 2000);
                     });
@@ -69,8 +69,8 @@ $id_mapel = $_GET['id_mapel'];
                         confirmButtonText: 'OK'
                     });
                     setTimeout(function() {
-                        $('button').prop("disabled", false);
-                        $('button').html('Simpan');
+                        $('#tombol_submit').prop("disabled", false);
+                        $('#tombol_submit').html('Simpan');
                     }, 2000);
                 }
             }
