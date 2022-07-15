@@ -16,7 +16,7 @@ if (!isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Learning | Guru</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
-    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <?php
     require_once('../include/head.php');
     ?>
@@ -71,9 +71,7 @@ if (!isset($_SESSION['user'])) {
     require_once('../include/modal.php');
     require_once('../include/script.php');
     ?>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <!-- Tempus Dominus JavaScript -->
-    <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         load_list('<?php base_url("guru/kuis/list.php"); ?>');
     </script>

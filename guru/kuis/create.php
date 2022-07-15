@@ -140,5 +140,18 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
             }
         });
     });
-    const picker = new tempusdominus.TempusDominus(document.getElementById('tanggal'));
+    // time
+    $('#waktu').flatpickr({
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true
+    });
+    // datetime
+    $('#tanggal').flatpickr({
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+        minDate: "today"
+    });
 </script>
