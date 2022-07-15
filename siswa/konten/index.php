@@ -96,7 +96,7 @@ $submateri = relation('tb_r_submateri', 'id_submateri', $_GET['id_submateri']);
                                                     <span class="symbol-btn-group me-2">
                                                         <i class="fas fa-solid fa-download"></i>
                                                     </span>
-                                                    Lihat Konten
+                                                    Unduh
                                                 </a>
                                             </div>
                                         </td>
