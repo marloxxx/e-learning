@@ -84,7 +84,7 @@ $judul_mapel = relation('tb_m_mapel', 'id_mapel', $id)['nama'];
                                         <td><?= substr($row['deskripsi'], 0, 100); ?></td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="<?= base_url('siswa/submateri/?id_materi=' . $row['id_materi']) ?>" class="btn btn-info">
+                                                <a href="<?= base_url('siswa/submateri/?id_materi=' . $row['id_materi'] . '&id_mapel=' . $id) ?>" class="btn btn-primary">
                                                     <span class="symbol-btn-group me-2">
                                                         <i class="fas fa-eye"></i>
                                                     </span>

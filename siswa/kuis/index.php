@@ -84,8 +84,8 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['judul']; ?></td>
-                                        <td><?= relation('tb_m_materi', 'id_materi', $row['id_materi'],); ?></td>
-                                        <td><?= $row['jumlah']; ?></td>
+                                        <td><?= relation('tb_m_materi', 'id_materi', $row['id_materi'])['judul']; ?></td>
+                                        <td><?= $row['jumlah_soal']; ?></td>
                                         <td><?= $row['waktu']; ?></td>
                                         <td><?= $row['waktu_mulai']; ?></td>
                                         <td>
