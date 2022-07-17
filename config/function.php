@@ -14,62 +14,43 @@ function antiinjeksi($text)
     $safetext = $mysqli->real_escape_string(stripslashes(strip_tags(htmlspecialchars($text, ENT_QUOTES))));
     return $safetext;
 }
-function buatkalender($tanggal, $bulan, $tahun)
+function getDay($date)
 {
-    $bulanan = array(
-        1 => "Januari", "Februari", "Maret", "April",
-        "Mei", "Juni", "Juli", "Agustus", "September",
-        "Oktober", "November", "Desember"
+    // ambil hari, tanggal dan tahun
+    $day = date('D', strtotime($date));
+    $dayList = array(
+        'Sun' => 'Minggu',
+        'Mon' => 'Senin',
+        'Tue' => 'Selasa',
+        'Wed' => 'Rabu',
+        'Thu' => 'Kamis',
+        'Fri' => 'Jumat',
+        'Sat' => 'Sabtu'
     );
-    $bln = date("n");
-    $thn = date("Y");
-
-    $jmlhari = date("t", mktime(0, 0, 0, $bulan, 1, $tahun));
-    $haritglsatu = date("w", mktime(0, 0, 0, $bulan, 1, $tahun));
-
-    $kalender = "<table cellspacing=1 cellpadding=4  
-                 border=0 class=tabel_data>\n";
-    $kalender .= "<tr class=tr_terang>
-                 <td colspan=7>$bulanan[$bln], $thn
-                 </td></tr>\n";
-
-    $kalender .= "<tr class=tr_judul>
-                  <td>M</td><td>S</td><td>S</td><td>R</td>
-                  <td>K</td><td>J</td><td>S</td></tr>\n";
-    $a       = 1;
-    $adabaris   = TRUE;
-    $mulaicetak = 0;
-    while ($adabaris) {
-        $kalender .= "<tr align=center class=tr_terang>";
-        for ($i = 0; $i < 7; $i++) {
-            if ($mulaicetak < $haritglsatu) {
-                $kalender .= "<td>&nbsp;</td>";
-                $mulaicetak++;
-            } elseif ($a <= $jmlhari) {
-                $tt = $a;
-                if ($a == $tanggal) {
-                    $tt = "<span style='color: blue; font-weight: bold; 
-                   font-size: larger; text-decoration: blink;'>
-                   $tt</span>";
-                }
-                if ($i == 0) {
-                    $tt = "<font color=\"#FF0000\">$tt</font>";
-                }
-                $kalender .= "<td>$tt</td>";
-                $a++;
-            } else {
-                $kalender .= "<td>&nbsp;</td>";
-            }
-        }
-        $kalender .= "</tr>\n";
-        if ($a <= $jmlhari) {
-            $adabaris = TRUE;
-        } else {
-            $adabaris = FALSE;
-        }
-    }
-    $kalender .= "</table>\n";
-    return $kalender;
+    $month = date('M', strtotime($date));
+    $monthList = array(
+        'Jan' => 'Januari',
+        'Feb' => 'Februari',
+        'Mar' => 'Maret',
+        'Apr' => 'April',
+        'May' => 'Mei',
+        'Jun' => 'Juni',
+        'Jul' => 'Juli',
+        'Aug' => 'Agustus',
+        'Sep' => 'September',
+        'Oct' => 'Oktober',
+        'Nov' => 'November',
+        'Dec' => 'Desember'
+    );
+    $year = date('Y', strtotime($date));
+    // hasilkan hari dengan format indonesia
+    $result = $dayList[$day] . ', ' . $monthList[$month] . ' ' . $year;
+    return $result;
+}
+function getMinute($date)
+{
+    $minute = date('i', strtotime($date));
+    return $minute;
 }
 function validasi($str, $tipe)
 {
@@ -132,5 +113,20 @@ function relation($table, $id, $field)
     $query = $con->query($sql);
     $query->execute();
     $data = $query->fetch(PDO::FETCH_ASSOC);
+    return $data;
+}
+
+function getJawaban($id)
+{
+    global $con;
+    $sql = "SELECT * FROM tb_d_jawaban WHERE id_soal = $id AND id_siswa = " . $_SESSION['user']['id'];
+    $query = $con->query($sql);
+    $query->execute();
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    if ($data) {
+        return $data['jawaban'];
+    } else {
+        return null;
+    }
     return $data;
 }

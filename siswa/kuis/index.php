@@ -23,7 +23,7 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>E-Learning | Guru</title>
+    <title>E-Learning | Kuis</title>
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.png" />
     <?php
     require_once('../include/head.php');
@@ -92,10 +92,23 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                             <div class="btn-group" role="group">
                                                 <?php
                                                 $now = date('Y-m-d H:i:s');
-                                                if ($row['waktu_mulai'] >= $now) {
+                                                // ambil durasi kuis dan ubah ke detik
+                                                $durasi = date_parse($row['waktu']);
+                                                $durasi = $durasi['hour'] * 3600 + $durasi['minute'] * 60 + $durasi['second'];
+                                                // ambil waktu mulai kuis dan tambah waktu mulai kuis dengan durasi kuis
+                                                $waktu_mulai = strtotime($row['waktu_mulai']);
+                                                $waktu_mulai = $waktu_mulai + $durasi;
+                                                $waktu_selesai = date('Y-m-d H:i:s', $waktu_mulai);
+                                                $nilai = relation('tb_d_nilai', 'id_kuis', $row['id_kuis']);
+                                                if ($waktu_selesai >= $now && empty($nilai)) {
                                                 ?>
                                                     <!-- Masuk Kuis -->
-                                                    <a href="soal.php?id_kuis=<?= $row['id_kuis']; ?>" class="btn btn-primary">Masuk Kuis</a>
+                                                    <a href="start.php?id_kuis=<?= $row['id_kuis']; ?>" class="btn btn-sm btn-primary">Masuk Kuis</a>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <!-- Sudah Selesai -->
+                                                    <a href="detail.php?id_kuis=<?= $row['id_kuis']; ?>" class="btn btn-sm btn-secondary">Detail Kuis</a>
                                                 <?php
                                                 }
                                                 ?>
@@ -119,9 +132,6 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
     require_once('../include/modal.php');
     require_once('../include/script.php');
     ?>
-    <script>
-        load_list('<?php base_url("siswa/materi/list.php?id_mapel=" . $id); ?>');
-    </script>
 </body>
 
 </html>
